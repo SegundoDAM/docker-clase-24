@@ -1,15 +1,27 @@
 CREATE DATABASE escuela;
+CREATE TABLE curso_escuela (
+    id_curso INT PRIMARY KEY AUTO_INCREMENT,
+    nivel_curso INT
+);
 CREATE TABLE estudiante_escolar (
     id_estudiante INT PRIMARY KEY AUTO_INCREMENT,
     nombre_estudiante VARCHAR(55),
     apellidoUno_estudiante VARCHAR(55),
-    apellidoDos_estudiante VARCHAR(55)
+    apellidoDos_estudiante VARCHAR(55),
     curso_id INT,
-    FOREIGN KEY (curso_id) REFERENCES Curso(id_curso)
+    FOREIGN KEY (curso_id) REFERENCES curso_escuela(id_curso)
 );
-CREATE TABLE curso_escuela (
-    id_curso INT PRIMARY KEY AUTO_INCREMENT,
-    nivel_curso INT
+CREATE TABLE actividad_escolar (
+    id_actividad INT PRIMARY KEY AUTO_INCREMENT,
+    descripcion_actividad VARCHAR(55),
+    fecha_celebracion DATE
+);
+CREATE TABLE estudiante_actividad_escolar(
+    id_estudiante INT,
+    id_actividad INT,
+    PRIMARY KEY (id_estudiante,id_actividad),
+    Foreign Key (id_estudiante) REFERENCES estudiante_escolar(id_estudiante),
+    Foreign Key (id_actividad) REFERENCES actividad_escolar(id_actividad)
 );
 CREATE TABLE asignatura_escuela (
     id_asignatura INT PRIMARY KEY AUTO_INCREMENT,
