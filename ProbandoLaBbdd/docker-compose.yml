@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  mysql-standalone:
+    container_name: mysql-standalone
+    image: mysql:5.7
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "sa"
+      MYSQL_DATABASE: "dockering"
+      MYSQL_USER: "harnina"
+      MYSQL_PASSWORD: "zzzz"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - harnina_net 
+      
+  javapersona:
+    container_name: javapersona
+    image: appprobarbbdd:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-standalone:3306/dockering
+    ports:
+      - "8080:8080"
+    depends_on:
+       - mysql-standalone
+    networks:
+      - harnina_net 
+       
+volumes:
+  mysql-data:
+networks:
+  harnina_net:
+    driver: bridge
+
