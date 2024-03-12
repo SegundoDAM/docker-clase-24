@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name="contrato_data")
 public class Contrato {
+	//comentario pa na
 	@Id
 	@Column(name="id_contrato")
 	private Long id;
