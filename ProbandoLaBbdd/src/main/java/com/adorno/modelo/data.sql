@@ -1,5 +1,5 @@
 CREATE DATABASE escuela;
-CREATE TABLE curso_escuela (
+CREATE TABLE IF NOT EXISTS curso_escuela (
     id_curso INT PRIMARY KEY AUTO_INCREMENT,
     nivel_curso INT
 );
@@ -27,7 +27,7 @@ CREATE TABLE asignatura_escuela (
     id_asignatura INT PRIMARY KEY AUTO_INCREMENT,
     nombre_asignatura VARCHAR(55),
     curso_id INT,
-    FOREIGN KEY (curso_id) REFERENCES Curso(id_curso)
+    FOREIGN KEY (curso_id) REFERENCES curso_escuela(id_curso)
 );
 
 CREATE TABLE asignatura_estudiante (
@@ -35,9 +35,9 @@ CREATE TABLE asignatura_estudiante (
     estudiante_id INT,
     anno_curso INT,
     nota_final DECIMAL(4,2),
-    PRIMARY KEY (asignatura_id, estudiante_id, anno),
-    FOREIGN KEY (asignatura_id) REFERENCES Asignatura(id_asignatura),
-    FOREIGN KEY (estudiante_id) REFERENCES Estudiante(id_estudiante)
+    PRIMARY KEY (asignatura_id, estudiante_id, anno_curso),
+    FOREIGN KEY (asignatura_id) REFERENCES asignatura_escuela(id_asignatura),
+    FOREIGN KEY (estudiante_id) REFERENCES estudiante_escolar(id_estudiante)
 );
 INSERT INTO curso_escuela (nivel_curso) VALUES
 (1),
